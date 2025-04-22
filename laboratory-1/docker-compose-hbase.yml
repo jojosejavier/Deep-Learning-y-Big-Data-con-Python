@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.0
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+
+  hbase:
+    image: dajobe/hbase
+    container_name: hbase
+    depends_on:
+      - zookeeper
+    ports:
+      - "9090:9090"  
+    volumes:
+      - ./kz.csv:/datos/kz.csv
+
+
+
+
+
+
+
+
